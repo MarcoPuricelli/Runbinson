@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runbinson</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Schermata di caricamento -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <h1>RUNBINSON</h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p id="loading-text">Caricamento...</p>
+        </div>
+    </div>
+
+    <!-- Selezione lingua -->
+    <div id="language-select" class="screen hidden">
+        <div class="container">
+            <h1>Runbinson</h1>
+            <h2 id="select-language-text">Seleziona la lingua</h2>
+            <div class="language-buttons">
+                <button id="lang-it" class="btn">Italiano</button>
+                <button id="lang-en" class="btn">English</button>
+                <button id="lang-de" class="btn">Deutsch</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schermata di autenticazione -->
+    <div id="auth-screen" class="screen hidden">
+        <div class="container">
+            <h1>Runbinson</h1>
+            <div id="login-form">
+                <h2 id="login-title">Accedi</h2>
+                <!-- Error message container for login -->
+                <div id="login-error" class="error-message"></div>
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember" id="remember-text">Ricorda i miei dati</label>
+                </div>
+                <button id="login-btn" class="btn">Accedi</button>
+                <p id="switch-to-signup">Non hai un account? <span>Registrati</span></p>
+            </div>
+            <div id="signup-form" class="hidden">
+                <h2 id="signup-title">Registrati</h2>
+                <!-- Error message container for signup -->
+                <div id="signup-error" class="error-message"></div>
+                <input type="text" id="new-username" placeholder="Username" required>
+                <input type="password" id="new-password" placeholder="Password" required>
+                <input type="password" id="confirm-password" placeholder="Conferma Password" required>
+                <button id="signup-btn" class="btn">Registrati</button>
+                <p id="switch-to-login">Hai già un account? <span>Accedi</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Connessione Strava -->
+    <div id="strava-connect" class="screen hidden">
+        <div class="container">
+            <h1>Runbinson</h1>
+            <h2 id="connect-strava-text">Connetti il tuo account Strava</h2>
+            <p id="strava-description">Per giocare a Runbinson, devi collegare il tuo account Strava per tracciare le tue corse.</p>
+            <button id="connect-strava-btn" class="btn">
+                <span id="connect-btn-text">Connetti con Strava</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Schermata principale di gioco -->
+    <div id="game-screen" class="screen hidden">
+        <div class="game-header">
+            <div class="stats-container">
+                <div class="stat">
+                    <span id="survival-label">Sopravvivenza</span>
+                    <div class="progress-bar">
+                        <div id="survival-progress" class="progress" style="width: 66%;"></div>
+                    </div>
+                    <span id="survival-value">20/30</span>
+                </div>
+                <div class="stat">
+                    <span id="xp-label">Esperienza</span>
+                    <div class="progress-bar">
+                        <div id="xp-progress" class="progress" style="width: 0%;"></div>
+                    </div>
+                    <span id="xp-value">0</span>
+                </div>
+            </div>
+            <div class="menu-button">
+                <button id="menu-btn">☰</button>
+            </div>
+        </div>
+
+        <div id="map-container">
+            <div id="map-wrapper">
+                <div id="map">
+                    <img src="isola1.png" alt="Mappa dell'isola" id="map-image">
+                    <div class="fog-of-war" id="fog-1"></div>
+                    <div class="fog-of-war" id="fog-2"></div>
+                    <div class="fog-of-war" id="fog-3"></div>
+                    <div class="fog-of-war" id="fog-4"></div>
+                    <div class="fog-of-war" id="fog-5"></div>
+                    <div id="markers-container"></div>
+                    <div id="pointer" class="hidden"></div>
+                </div>
+            </div>
+            <div class="map-controls">
+                <button id="zoom-in">+</button>
+                <button id="zoom-out">-</button>
+                <button id="reset-map">⟲</button>
+                <button id="add-marker" id="add-marker-text">Aggiungi Marker</button>
+                <button id="remove-marker" id="remove-marker-text">Rimuovi Marker</button>
+            </div>
+        </div>
+
+        <div id="game-menu" class="hidden">
+            <div class="menu-container">
+                <h2 id="menu-title">Menu</h2>
+                <button id="diary-btn" class="menu-btn">Diario</button>
+                <button id="build-btn" class="menu-btn">Costruisci</button>
+                <button id="unlock-btn" class="menu-btn">Sblocca Zone</button>
+                <button id="settings-btn" class="menu-btn">Impostazioni</button>
+                <button id="logout-btn" class="menu-btn">Logout</button>
+                <button id="close-menu" class="menu-btn">Chiudi</button>
+            </div>
+        </div>
+
+        <div id="diary-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="diary-title">Diario di Sopravvivenza</h2>
+                <div id="diary-entries"></div>
+                <div id="new-entry-form">
+                    <h3 id="new-entry-title">Nuova Pagina</h3>
+                    <textarea id="diary-text" placeholder="Scrivi qui i tuoi pensieri..."></textarea>
+                    <button id="save-entry" class="btn">Salva</button>
+                </div>
+                <button id="close-diary" class="close-btn">×</button>
+            </div>
+        </div>
+
+        <div id="build-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="build-title">Costruisci</h2>
+                <div class="build-items">
+                    <div class="build-item" data-cost="15" data-type="hut" data-max="2">
+                        <div style="width:64px;height:64px;background:#7e5733;margin:0 auto;border-radius:5px;"></div>
+                        <h3>Capanna</h3>
+                        <p id="hut-cost">Costo: 15 XP</p>
+                        <div class="item-counter">0/2</div>
+                        <div class="completion-badge hidden">
+                            <span>Completato</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </div>
+                    <div class="build-item" data-cost="5" data-type="hoe" data-max="2">
+                        <div style="width:64px;height:64px;background:#8b4513;margin:0 auto;border-radius:5px;"></div>
+                        <h3>Zappa</h3>
+                        <p id="hoe-cost">Costo: 5 XP</p>
+                        <div class="item-counter">0/2</div>
+                        <div class="completion-badge hidden">
+                            <span>Completato</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </div>
+                    <div class="build-item" data-cost="5" data-type="fence" data-max="2">
+                        <div style="width:64px;height:64px;background:#a0522d;margin:0 auto;border-radius:5px;"></div>
+                        <h3>Recinto</h3>
+                        <p id="fence-cost">Costo: 5 XP</p>
+                        <div class="item-counter">0/2</div>
+                        <div class="completion-badge hidden">
+                            <span>Completato</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </div>
+                    <div class="build-item" data-cost="10" data-type="bow" data-max="2">
+                        <div style="width:64px;height:64px;background:#8b4513;margin:0 auto;border-radius:5px;"></div>
+                        <h3>Arco e Frecce</h3>
+                        <p id="bow-cost">Costo: 10 XP</p>
+                        <div class="item-counter">0/2</div>
+                        <div class="completion-badge hidden">
+                            <span>Completato</span>
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-build" class="close-btn">×</button>
+            </div>
+        </div>
+
+        <div id="unlock-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="unlock-title">Sblocca Zone</h2>
+                <div class="unlock-zones">
+                    <div class="zone-item" data-cost="10" data-zone="1">
+                        <h3 id="zone1-name">Zona 1: Spiaggia Nord</h3>
+                        <p id="zone1-cost">Costo: 10 XP</p>
+                        <button class="unlock-btn" id="unlock-zone-1">Sblocca</button>
+                    </div>
+                    <div class="zone-item" data-cost="15" data-zone="2">
+                        <h3 id="zone2-name">Zona 2: Foresta</h3>
+                        <p id="zone2-cost">Costo: 15 XP</p>
+                        <button class="unlock-btn" id="unlock-zone-2">Sblocca</button>
+                    </div>
+                    <div class="zone-item" data-cost="30" data-zone="3">
+                        <h3 id="zone3-name">Zona 3: Montagna</h3>
+                        <p id="zone3-cost">Costo: 30 XP</p>
+                        <button class="unlock-btn" id="unlock-zone-3">Sblocca</button>
+                    </div>
+                    <div class="zone-item" data-cost="50" data-zone="4">
+                        <h3 id="zone4-name">Zona 4: Grotta</h3>
+                        <p id="zone4-cost">Costo: 50 XP</p>
+                        <button class="unlock-btn" id="unlock-zone-4">Sblocca</button>
+                    </div>
+                    <div class="zone-item" data-cost="100" data-zone="5">
+                        <h3 id="zone5-name">Zona 5: Tempio</h3>
+                        <p id="zone5-cost">Costo: 100 XP</p>
+                        <button class="unlock-btn" id="unlock-zone-5">Sblocca</button>
+                    </div>
+                </div>
+                <button id="close-unlock" class="close-btn">×</button>
+            </div>
+        </div>
+
+        <div id="marker-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="marker-title">Aggiungi Marker</h2>
+                <input type="text" id="marker-name" placeholder="Nome del luogo">
+                <div class="marker-buttons">
+                    <button id="save-marker" class="btn">Salva</button>
+                    <button id="cancel-marker" class="btn">Annulla</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="notification" class="hidden">
+            <p id="notification-text"></p>
+        </div>
+
+        <div id="dialog-box" class="hidden">
+            <div class="dialog-content">
+                <p id="dialog-text"></p>
+                <button id="dialog-btn" class="btn">OK</button>
+            </div>
+        </div>
+
+        <div id="event-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="event-title">Evento</h2>
+                <p id="event-description"></p>
+                <div class="event-buttons">
+                    <button id="event-action" class="btn">Azione</button>
+                    <button id="event-cancel" class="btn">Ignora</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="strava_api.js"></script>
+</body>
+</html>

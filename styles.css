@@ -1,0 +1,721 @@
+/* Stili generali */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body {
+    background-color: #222;
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    z-index: 10;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+    text-shadow: 2px 2px 0 #000;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.btn {
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all 0.3s;
+}
+
+.btn:hover {
+    background-color: #ffd633;
+    transform: scale(1.05);
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid #555;
+    background-color: #444;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+/* Loading Screen */
+#loading-screen {
+    background-color: #222;
+    z-index: 100;
+    margin-top: 25svh;
+}
+
+.loading-container {
+    text-align: center;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #444;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background-color: #ffcc00;
+    transition: width 0.5s;
+}
+
+#loading-text {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+/* Language Selection */
+.language-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Auth Styles */
+#auth-screen .container {
+    max-width: 400px;
+}
+
+#login-form, #signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#login-title, #signup-title {
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.remember-me input {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+#switch-to-signup, #switch-to-login {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+#switch-to-signup span, #switch-to-login span {
+    color: #ffcc00;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Error message styles */
+.error-message {
+    color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.2);
+    border: 1px solid #ff6b6b;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 0.8rem;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+/* Strava Connect */
+#strava-connect .container {
+    max-width: 450px;
+}
+
+#connect-strava-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fc4c02;
+    padding: 12px 24px;
+}
+
+#connect-strava-btn img {
+    height: 24px;
+    margin-right: 10px;
+}
+
+#strava-description {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+/* Game Screen */
+#game-screen {
+    display: block;
+    background-color: #222;
+    overflow: hidden;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    border-bottom: 2px solid #ffcc00;
+    height: 80px;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat span {
+    font-size: 0.7rem;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 15px;
+    background-color: #444;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #ffcc00;
+}
+
+#survival-progress {
+    background-color: #ff6b6b;
+}
+
+#xp-progress {
+    background-color: #4ecdc4;
+}
+
+.menu-button button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Map */
+#map-container {
+    position: relative;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+}
+
+#map-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    cursor: move;
+}
+
+#map-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.fog-of-war {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+#fog-1 {
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 30%;
+}
+
+#fog-2 {
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 40%;
+}
+
+#fog-3 {
+    bottom: 0;
+    right: 0;
+    width: 35%;
+    height: 35%;
+}
+
+#fog-4 {
+    bottom: 30%;
+    left: 20%;
+    width: 25%;
+    height: 25%;
+}
+
+#fog-5 {
+    top: 40%;
+    right: 30%;
+    width: 20%;
+    height: 20%;
+}
+
+.map-controls {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.map-controls button {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: 2px solid #ffcc00;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#add-marker, #remove-marker {
+    width: auto;
+    padding: 0 10px;
+    font-size: 0.8rem;
+}
+
+#pointer {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.map-marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ffcc00;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    cursor: pointer;
+}
+
+.marker-label {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    transform: translateY(-100%);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Game Menu */
+#game-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 300px;
+}
+
+.menu-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-btn:hover {
+    background-color: #555;
+}
+
+/* Logout button styling */
+#logout-btn {
+    background-color: #ff6b6b;
+}
+
+#logout-btn:hover {
+    background-color: #ff8c8c;
+}
+
+/* Diary */
+#diary-entries {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+    padding: 10px;
+    background-color: #444;
+}
+
+.diary-entry {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #555;
+}
+
+.entry-date {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.entry-content {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+#new-entry-form {
+    margin-top: 20px;
+}
+
+#diary-text {
+    height: 100px;
+    resize: none;
+}
+
+/* Build Items */
+.build-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.build-item {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.build-item:hover {
+    transform: scale(1.05);
+}
+
+.build-item img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+}
+
+.build-item h3 {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.build-item p {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+/* Item Counter Styles */
+.item-counter {
+    font-size: 0.7rem;
+    color: #ffcc00;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.completion-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4ecdc4;
+    color: #fff;
+    padding: 5px;
+    border-radius: 0 5px 0 5px;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.checkmark {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Unlock Zones */
+.unlock-zones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.zone-item {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.zone-item h3 {
+    font-size: 0.9rem;
+}
+
+.zone-item p {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.unlock-btn {
+    background-color: #ffcc00;
+    color: #333;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.zone-item.unlocked {
+    background-color: #2a623d;
+}
+
+.zone-item.unlocked .unlock-btn {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.modal-content {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Event Modal */
+#event-modal .modal-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+#event-description {
+    margin: 20px 0;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.event-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Notifications */
+#notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 100;
+    transition: all 0.3s;
+}
+
+/* Dialog Box */
+#dialog-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 100;
+    width: 90%;
+    max-width: 500px;
+    border: 2px solid #ffcc00;
+}
+
+.dialog-content {
+    text-align: center;
+}
+
+#dialog-text {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1rem;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+    
+    .game-header {
+        height: 100px;
+    }
+    
+    .stats-container {
+        width: 75%;
+    }
+    
+    .stat span {
+        font-size: 0.6rem;
+    }
+    
+    .build-items {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    .event-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
